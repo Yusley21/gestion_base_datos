@@ -1,0 +1,67 @@
+# gestion_base_datos
+proyecto maternidad
+
+
+insert into madre values
+(1,'1351787914','Karla','Perez','ecuatoriana','calle12av18',0992787403,'karla@gmail.com','03/03/1987'),
+(2,'1546821501','Maria','Lopez','ecuatoriana','calle11v18',0956226214,'maria@gmail.com','05/01/1999'),
+(3,'1305520111','Stefania','Sanchez','ecuatoriana','calle11av10',0856412433,'stefania@gmail.com','07/02/2000'),
+(4,'1318927888','Dayanna','Rodriguez','ecuatoriana','calle24av12',0956622571,'dayanna@gmail.com','02/06/1995'),
+(5,'0525785941','Scarlett','Brown','ecuatoriana','calle26av8',0936555987,'scarlett@gmail.com','20/08/1990');
+select * from madre;
+
+insert into administracion values
+(10,'14:45:13','03/05/2019','dolor intenso','34 semanas','prueba de suero maternal',1),
+(11,'08:40:13','10/07/2020','calambres en el vientre','39 semanas','translucencia nucal',2),
+(12,'07:15:24','07/02/2020','contraccion','41 semanas','ultrasonido',3),
+(13,'10:05:24','07/02/2021','contraccion','32 semanas','ultrasonido',4),
+(14,'18:58:02','20/08/2022','dolor intenso','40 semanas','alfa-fetoproteina',5);
+select * from administracion;
+delete from personal_maternidad;
+
+insert into personal_maternidad values
+(20,'1351784914','Carlos','Zambrano','obstetra','Madrugada'),
+(21,'1784559964','Nicole','Rojas','anestesista','dia'),
+(22,'1090072923','Camila','Casas','personal de enfermeria','tarde'),
+(23,'1318927258','Matias','Campo','pediatra','tarde'),
+(24,'0921999488','Sebastian','Mejia','cirujano general','dia'),
+(25,'1351754914','Jackson','Cantos','Medico general','dia');
+select * from personal_maternidad;
+
+alter table personal_maternidad
+  drop ano_atencion;
+  
+insert into mantenimiento values
+(31,'1351785642','Roberto','Lopez','Sala de parto','05/05/2019'),
+(32,'0545854164','Martha','Perez','quirofano','14/07/2020'),
+(33,'1047152635','Julio','Cevallos','Sala de parto','07/02/2020'),
+(34,'1358521456','Kevin','Mera','quirofano','08/02/2021'),
+(35,'1352485115','Luisa','Anchundia','quirofano','22/08/2022');
+select * from mantenimiento;
+
+insert into bebe values
+(54,'06/05/2019','Masculino','5 dosis','3,3 kg','31 cm','Sano','no',20,1);
+(41,'14/07/2020','Masculino','2 dosis','3,8 kg','31 cm','Sano','no',21,2),
+(42,'07/02/2020','Femenino','3 dosis','2,5 kg','33 cm','Intolerancia alimenticia','si',22,3),
+(43,'09/02/2021','Masculino','1 dosis','2,1 kg','35 cm','Condiciones respiratorias','si',24,4),
+(44,'22/08/2022','Femenino','4 dosis','2,1 kg','34 cm','Sepsis','si',24,5);
+select * from bebe;
+ALTER TABLE bebe
+ADD COLUMN Enfermedad CHAR(30);
+
+insert into sala_parto values
+(50,'06/05/2019',20,1,40,31),
+(51,'07/02/2020',21,2,41,33);
+select * from sala_parto;
+
+insert into quirofano values
+(60,'14/07/2020',24,32,42,3),
+(61,'08/02/2021',25,34,43,4),
+(62,'22/08/2022',25,35,44,5);
+select * from quirofano;
+
+insert into incubadora values
+('Enterocolitis necrotizante','06/05/2019',20,40),
+('Condiciones respiratorias','14/07/2020',21,41),
+('Sepsis','09/02/2021',24,43);
+select * from incubadora;
