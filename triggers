@@ -1,0 +1,23 @@
+# gestion_base_datos
+proyecto maternidad
+
+
+CREATE OR REPLACE FUNCTION enfer_man1() RETURNS TRIGGER
+AS
+$enfer_man1$
+DECLARE
+	enferm1 varchar(30);
+	enferm varchar(30):= 'si';
+BEGIN
+	if  EXISTS(select * from public.bebe where enfermedad = 'si') then
+	RAISE EXCEPTION 'El quirofano no se puede usar hasta que no se alla dado mantenimiento';
+  	END IF;
+   RETURN new;
+END;
+$enfer_man1$
+LANGUAGE plpgsql;
+
+--before after instead of
+create trigger enfer before insert
+on "bebe" for EACH ROW 
+execute procedure enfer_man1();
