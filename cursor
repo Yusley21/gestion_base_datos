@@ -1,0 +1,21 @@
+# gestion_base_datos
+proyecto maternidad
+
+
+do
+$$
+declare
+       registro Record;
+	 
+	   Cur_edades Cursor for SELECT * from  "madre"  order by "fecha_nacimiento";
+begin
+for registro in Cur_edades loop
+Raise Notice 
+'
+Nombre Madre: % 
+fecha nacimiento: %'
+,
+ registro.nombre_madre, age(registro.fecha_nacimiento);
+end loop;
+end $$
+Language 'plpgsql'; 
