@@ -1,0 +1,249 @@
+/*==============================================================*/
+/* Table: ADMINISTRACION                                        */
+/*==============================================================*/
+create table ADMINISTRACION (
+   ID_ADMINISTRACION    INT4                 not null,
+   HORA_INGRESO         TIME                 not null,
+   FECHA_INGRESO        DATE                 not null,
+   MOTIVO_CONSULTA      CHAR(30)             not null,
+   SEMANA_EMBARAZO      CHAR(30)             not null,
+   DETALLES_EXAMENES    CHAR(50)             not null,
+   ID_MADRE             INT4                 null,
+   constraint PK_ADMINISTRACION primary key (ID_ADMINISTRACION)
+);
+
+/*==============================================================*/
+/* Index: ADMINISTRACION_PK                                     */
+/*==============================================================*/
+create unique index ADMINISTRACION_PK on ADMINISTRACION (
+ID_ADMINISTRACION
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_1_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_1_FK on ADMINISTRACION (
+ID_MADRE
+);
+
+/*==============================================================*/
+/* Table: BEBE                                                  */
+/*==============================================================*/
+create table BEBE (
+   ID_BEBE              INT4                 not null,
+   FECHA_NACIMIENTO_BEBE DATE                 not null,
+   GENERO               CHAR(20)             not null,
+   DOSIS                CHAR(20)             not null,
+   PESO_AL_NACER        CHAR(20)             not null,
+   PERIMETRO_CEFALICO   CHAR(20)             not null,
+   DETALLES_EXAMENES    CHAR(50)             not null,
+   ENFERMEDAD           CHAR(20)             not null,
+   ID_PERSONAL          INT4                 null,
+   ID_MADRE             INT4                 null,
+   constraint PK_BEBE primary key (ID_BEBE)
+);
+
+/*==============================================================*/
+/* Index: BEBE_PK                                               */
+/*==============================================================*/
+create unique index BEBE_PK on BEBE (
+ID_BEBE
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_8_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_8_FK on BEBE (
+ID_MADRE
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_9_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_9_FK on BEBE (
+ID_PERSONAL
+);
+
+/*==============================================================*/
+/* Table: INCUBADORA                                            */
+/*==============================================================*/
+create table INCUBADORA (
+   CAUSA                CHAR(70)             not null,
+   FECHA_INGRESO        DATE                 not null,
+   ID_PERSONAL          INT4                 null,
+   ID_BEBE              INT4                 null
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_10_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_10_FK on INCUBADORA (
+ID_BEBE
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_11_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_11_FK on INCUBADORA (
+ID_PERSONAL
+);
+
+/*==============================================================*/
+/* Table: MADRE                                                 */
+/*==============================================================*/
+create table MADRE (
+   ID_MADRE             INT4                 not null,
+   CEDULA_MADRE         INT4                 not null,
+   NOMBRE_MADRE         CHAR(30)             not null,
+   APELLIDO_MADRE       CHAR(30)             not null,
+   NACIONALIDAD         CHAR(30)             not null,
+   DIRECCION            CHAR(30)             not null,
+   TELEFONO             INT4                 not null,
+   CORREO_ELECTRONICO   CHAR(40)             not null,
+   FECHA_NACIMIENTO     DATE                 not null,
+   constraint PK_MADRE primary key (ID_MADRE)
+);
+
+/*==============================================================*/
+/* Index: MADRE_PK                                              */
+/*==============================================================*/
+create unique index MADRE_PK on MADRE (
+ID_MADRE
+);
+
+/*==============================================================*/
+/* Table: MANTENIMIENTO                                         */
+/*==============================================================*/
+create table MANTENIMIENTO (
+   ID_MANTENIMIENTO     INT4                 not null,
+   CEDULA_MANTENIMIENTO INT4                 not null,
+   NOMBRE_MANTENIMIENTO CHAR(30)             not null,
+   APELLIDO_MANTENIMIENTO CHAR(30)             not null,
+   AREA_MANTENIMIENTO   CHAR(40)             not null,
+   FECHA_MANTENIMIENTO  DATE                 not null,
+   constraint PK_MANTENIMIENTO primary key (ID_MANTENIMIENTO)
+);
+
+/*==============================================================*/
+/* Index: MANTENIMIENTO_PK                                      */
+/*==============================================================*/
+create unique index MANTENIMIENTO_PK on MANTENIMIENTO (
+ID_MANTENIMIENTO
+);
+
+/*==============================================================*/
+/* Table: PERSONAL_MATERNIDAD                                   */
+/*==============================================================*/
+create table PERSONAL_MATERNIDAD (
+   ID_PERSONAL          INT4                 not null,
+   CEDULA_PERSONAL      INT4                 not null,
+   NOMBRE_PERSONAL      CHAR(30)             not null,
+   APELLIDO_PERSONAL    CHAR(30)             not null,
+   ESPECIALIDAD         CHAR(30)             not null,
+   TURNO                CHAR(20)             not null,
+   ANO_ATENCION         DATE                 not null,
+   constraint PK_PERSONAL_MATERNIDAD primary key (ID_PERSONAL)
+);
+
+/*==============================================================*/
+/* Index: PERSONAL_MATERNIDAD_PK                                */
+/*==============================================================*/
+create unique index PERSONAL_MATERNIDAD_PK on PERSONAL_MATERNIDAD (
+ID_PERSONAL
+);
+
+/*==============================================================*/
+/* Table: QUIROFANO                                             */
+/*==============================================================*/
+create table QUIROFANO (
+   ID_QUIROFANO         INT4                 not null,
+   ANO_CESARIA          DATE                 not null,
+   ID_PERSONAL          INT4                 null,
+   ID_MANTENIMIENTO     INT4                 null,
+   ID_BEBE              INT4                 null,
+   ID_MADRE             INT4                 null,
+   constraint PK_QUIROFANO primary key (ID_QUIROFANO)
+);
+
+/*==============================================================*/
+/* Index: QUIROFANO_PK                                          */
+/*==============================================================*/
+create unique index QUIROFANO_PK on QUIROFANO (
+ID_QUIROFANO
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_3_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_3_FK on QUIROFANO (
+ID_MANTENIMIENTO
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_5_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_5_FK on QUIROFANO (
+ID_PERSONAL
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_7_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_7_FK on QUIROFANO (
+ID_MADRE
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_13_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_13_FK on QUIROFANO (
+ID_BEBE
+);
+
+/*==============================================================*/
+/* Table: SALA_PARTO                                            */
+/*==============================================================*/
+create table SALA_PARTO (
+   ID_PARTO             INT4                 not null,
+   ANO_PARTO            DATE                 not null,
+   ID_PERSONAL          INT4                 null,
+   ID_MADRE             INT4                 null,
+   ID_BEBE              INT4                 null,
+   ID_MANTENIMIENTO     INT4                 null,
+   constraint PK_SALA_PARTO primary key (ID_PARTO)
+);
+
+/*==============================================================*/
+/* Index: SALA_PARTO_PK                                         */
+/*==============================================================*/
+create unique index SALA_PARTO_PK on SALA_PARTO (
+ID_PARTO
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_2_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_2_FK on SALA_PARTO (
+ID_MANTENIMIENTO
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_4_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_4_FK on SALA_PARTO (
+ID_PERSONAL
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_6_FK                                     */
+/*==============================================================*/
+create  index RELATIONSHIP_6_FK on SALA_PARTO (
+ID_MADRE
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_12_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_12_FK on SALA_PARTO (
+ID_BEBE
+);
